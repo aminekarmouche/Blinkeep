@@ -1,0 +1,27 @@
+/* CSS declarations go here */
+* {
+  -webkit-transition: ease .2s;
+}
+body {
+	background-color: #F3F7F0;
+	text-align: center;
+}
+
+.container {
+	margin-bottom: 50px;
+}
+
+.logo {
+	margin-top: 10px
+	font-size: 60px;
+	color: #EF4152;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.login {
+	margin-top: 20px;
+}
+
+.table {
+	background-color: #F3F7F0;
+}

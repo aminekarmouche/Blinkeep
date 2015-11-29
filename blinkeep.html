@@ -1,0 +1,92 @@
+<head>
+  <title>Blinkeep App</title>
+</head>
+
+<body>
+	{{> hey}}
+</body>
+
+<!-- Hey There! That's the main template! -->
+<template name="hey">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<h1 class="logo">Blinkeep!</h1>
+				<h4>Save and retreive your thoughts in a Blink of an eye!</h4>
+			</div>
+			<div class="col-sm-4">
+				<div class="login">
+					{{> loginButtons}}
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	<!-- Check if user is authenticated -->
+	{{#if  currentUser}}
+		<div class="new row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				{{> newThought }}
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+		
+		<legend><h3>All my thoughts!</h3></legend>
+		<div class="table-responsive">
+			<table class="table col-md-4">
+				<thead>
+				  	<tr>
+				  		<th>Title</th>
+				  		<th>Thought</th>
+				  		<th>Reminder</th>
+				  		<th>Forget that!</th>
+				  	</tr>
+				</thead>
+				<tbody>
+				  	{{#each thoughts}}
+				  		{{> thought}}
+				  	{{/each}}
+				</tbody>
+	  		</table>
+	  	</div>
+  	{{else}}
+  	  <h2>You are not logged in! Please Login!</h2>
+	{{/if}}
+</template>
+
+<!-- Template for adding a new thought -->
+<template name="newThought">
+	<div>
+		{{#autoForm collection="Thoughts" id="insertThoughtForm" type="insert"}}
+		  <fieldset>
+		    <legend><h3>Add a new Thought</h3></legend>
+		    {{> afQuickField name='title'}}
+		    {{> afQuickField name='text' rows=3}}
+		    {{> afQuickField name='reminderDate'}}
+		  </fieldset>
+		  <button type="submit" class="btn btn-primary">Blink it!</button>
+		{{/autoForm}}
+	</div>
+</template>
+
+<!-- Template for a single thought in the table -->
+<template name="thought">
+	<tr>
+		<td class="col-md-2">
+			<span>{{> editableText collection="thoughts" field="title"}}</span>
+		</td>
+		<td class="col-md-4">
+			<span>{{> editableText collection="thoughts" field="text"}}</span>
+		</td>
+		<td class="col-md-2">
+		<span>{{ reminderDate }}</span>
+		</td>
+		<td class="col-md-1">
+			<button type="button" class="btn btn-default delete" aria-label="Left Align">
+		  		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+		  	</button>			
+		</td>		
+	</tr>
+</template>
